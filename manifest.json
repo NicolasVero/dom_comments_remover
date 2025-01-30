@@ -1,0 +1,15 @@
+{
+	"manifest_version": 1,
+	"name": "DOM comments remover",
+	"version": "1.0",
+	"description": "Deletes DOM comments",
+	"permissions": ["scripting"],
+	"host_permissions": ["<all_urls>"],
+	"content_scripts": [
+	  	{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"],
+			"run_at": "document_end"
+		}
+	]
+}
