@@ -2,14 +2,12 @@
 	"manifest_version": 3,
 	"name": "DOM comments remover",
 	"version": "1.0",
-	"description": "Deletes DOM comments",
-	"permissions": ["scripting"],
-	"host_permissions": ["<all_urls>"],
-	"content_scripts": [
-	  	{
-			"matches": ["<all_urls>"],
-			"js": ["content.js"],
-			"run_at": "document_end"
-		}
-	]
+	"description": "Deletes DOM comments.",
+	"permissions": ["scripting", "activeTab"],
+	"background": {
+		"service_worker": "trigger.js"
+	},
+	"action": {
+		"default_title": "Supprimer les commentaires"
+	}
 }
