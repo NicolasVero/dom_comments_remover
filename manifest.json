@@ -1,19 +1,19 @@
 {
-	"manifest_version": 3,
-	"name": "DOM comments remover",
-	"version": "1.0",
-	"description": "Deletes DOM comments.",
-	"permissions": ["scripting", "activeTab"],
-	"background": {
-		"service_worker": "trigger.js"
-	},
-	"action": {
-		"default_popup": "popup.html",
-		"default_icon": {
-			"16": "icons/icon16.png",
-			"48": "icons/icon48.png",
-			"128": "icons/icon128.png"
-		},
-		"default_title": "Supprimer les commentaires"
-	}
+    "manifest_version": 3,
+    "name": "DOM comments remover",
+    "version": "1.2",
+    "description": "Supprime les commentaires du DOM.",
+    "permissions": ["scripting", "activeTab", "storage"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        },
+        "default_title": "Supprimer les commentaires"
+    }
 }

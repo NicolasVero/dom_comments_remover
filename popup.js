@@ -1,5 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("remove-comments");
+    const checkbox = document.getElementById("auto-remove");
+
+    chrome.storage.local.get("autoRemove", (data) => {
+        checkbox.checked = data.autoRemove || false;
+    });
+
     if (button) {
         button.addEventListener("click", async () => {
             let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -21,4 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Sauvegarder l'état de la checkbox
+    checkbox.addEventListener("change", () => {
+        chrome.storage.local.set({ autoRemove: checkbox.checked });
+    });
 });
