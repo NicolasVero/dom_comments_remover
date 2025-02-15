@@ -17,3 +17,6 @@ button {
   cursor: pointer;
   width: 100%;
 }
+input[type="checkbox"] {
+  accent-color: #3541B5;
+}

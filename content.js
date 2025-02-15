@@ -4,7 +4,9 @@
     } 
 
     if (node.nodeType === Node.COMMENT_NODE) {
-        node.remove();
+        // node.remove();
+        // console.log(node);
+        node.replaceWith(document.createComment("nouveau commentaire"));
     } else {
         let child = node.firstChild;
         while (child) {
@@ -14,3 +16,8 @@
         }
     }
 })(document);
+
+// ✅ 
+if (window.props) {
+    console.log("Received variable:", window.props);
+}
