@@ -15,6 +15,12 @@ body {
     }
 }
 
+span.elements-separator {
+    border-top: 1px solid #858585;
+    display: block;
+    margin-block: 8px;
+}
+
 button {
     background-color: @primary-color;
     color: @white;
@@ -23,4 +29,16 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+label {
+    display: block;
+
+    input[type="checkbox"] {
+        accent-color: @primary-color;
+    }
+}
+
+label.sub-option {
+    margin-left: 8px;
 }

@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("remove-comments");
-    const checkbox = document.getElementById("auto-remove");
+    const auto_remove_checkbox = document.getElementById("auto-remove");
+    const rework_comments_checkbox = document.getElementById("rework-comments");
+    const rework_comments_end_template_checkbox = document.getElementById("rework-comments--end-template");
 
-    chrome.storage.local.get("auto_remove", (data) => {
-        checkbox.checked = data.auto_remove || false;
+    chrome.storage.local.get(["auto_remove", "rework_comments", "rework_comments_end_template"], (data) => {
+        auto_remove_checkbox.checked = data.auto_remove || false;
+        rework_comments_checkbox.checked = data.rework_comments || false;
+        rework_comments_end_template_checkbox.checked = data.rework_comments_end_template || false;
     });
 
     if (button) {
@@ -11,6 +15,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
             if (tab) {
+                await chrome.scripting.executeScript({
+                    target: { tabId: tab.id },
+                    func: (variable) => {
+                        window.props = variable;
+                    },
+                    args: [{
+                        message: "Hello from popup.js",
+                        rework_comments: {
+                            enable: rework_comments_checkbox.checked,
+                            display_end_template: rework_comments_end_template_checkbox.checked
+                        }
+                    }]
+                });
+
                 await chrome.scripting.executeScript({
                     target: { tabId: tab.id },
                     files: ["content.js"]
@@ -28,7 +46,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    checkbox.addEventListener("change", () => {
-        chrome.storage.local.set({ auto_remove: checkbox.checked });
+    auto_remove_checkbox.addEventListener("change", () => {
+        chrome.storage.local.set({ auto_remove: auto_remove_checkbox.checked });
     });
+    
+    rework_comments_checkbox.addEventListener("change", () => {
+        chrome.storage.local.set({ rework_comments: rework_comments_checkbox.checked });
+    });
+    
+    rework_comments_end_template_checkbox.addEventListener("change", () => {
+        chrome.storage.local.set({ rework_comments_end_template: rework_comments_end_template_checkbox.checked });
+    });
+    
 });
