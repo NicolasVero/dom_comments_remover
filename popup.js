@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("remove-comments");
-    const auto_remove_checkbox = document.getElementById("auto-remove");
     const rework_comments_checkbox = document.getElementById("rework-comments");
     const rework_comments_end_template_checkbox = document.getElementById("rework-comments--end-template");
 
     chrome.storage.local.get(["auto_remove", "rework_comments", "rework_comments_end_template"], (data) => {
-        auto_remove_checkbox.checked = data.auto_remove || false;
         rework_comments_checkbox.checked = data.rework_comments || false;
         rework_comments_end_template_checkbox.checked = data.rework_comments_end_template || false;
     });
@@ -45,10 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     }
-
-    auto_remove_checkbox.addEventListener("change", () => {
-        chrome.storage.local.set({ auto_remove: auto_remove_checkbox.checked });
-    });
     
     rework_comments_checkbox.addEventListener("change", () => {
         chrome.storage.local.set({ rework_comments: rework_comments_checkbox.checked });

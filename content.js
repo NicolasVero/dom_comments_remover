@@ -1,4 +1,4 @@
-(function removeComments(node) {
+(function remove_comments(node) {
     if (!node) {
         return;
     } 
@@ -16,13 +16,12 @@
         let child = node.firstChild;
         while (child) {
             const next = child.nextSibling;
-            removeComments(child);
+            remove_comments(child);
             child = next;
         }
     }
 })(document);
 
-console.log(window.props)
 
 function create_rework_comment(node, props) {
     const node_text = node.textContent || node.nodeValue || "";
